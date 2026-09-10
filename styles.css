@@ -1,0 +1,294 @@
+:root{
+  --ink:#1c2b22;
+  --paper:#f2ede0;
+  --cover:#132018;
+  --cover-2:#1b1f2c;
+  --gold:#c9a227;
+  --gold-dim:#8f7420;
+  --rule:#d8d0ba;
+  --red:#9c3b32;
+  --green:#3e6b4f;
+  --shadow: 0 18px 40px rgba(0,0,0,0.35);
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font-family: Georgia, 'Iowan Old Style', serif;
+  background: radial-gradient(circle at 20% -10%, var(--cover-2), var(--cover) 60%);
+  color:var(--ink);
+  min-height:100vh;
+  padding: 40px 20px 80px;
+}
+.wrap{
+  max-width: 880px;
+  margin:0 auto;
+}
+.masthead{
+  text-align:left;
+  color:var(--paper);
+  margin-bottom: 28px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(242,237,224,0.25);
+}
+.masthead .kicker{
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  margin: 0 0 6px;
+}
+.masthead h1{
+  font-size: 34px;
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+.masthead p{
+  margin: 8px 0 0;
+  color: rgba(242,237,224,0.65);
+  font-size: 14px;
+  font-family: 'Courier New', monospace;
+}
+.masthead-top{
+  display:flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.toolbar{ display:flex; gap:10px; flex-wrap:wrap; }
+.tool-btn{
+  background: transparent;
+  border: 1px solid rgba(242,237,224,0.35);
+  color: var(--paper);
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  padding: 8px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.tool-btn:hover{
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ---- Light theme ---- */
+body.light-theme{
+  background: linear-gradient(180deg, #faf7ee, #f2ede0 60%);
+}
+body.light-theme .masthead{
+  color: #1c2b22;
+  border-bottom-color: rgba(28,43,34,0.15);
+}
+body.light-theme .masthead .kicker{ color:#8f7420; }
+body.light-theme .masthead h1{ color:#1c2b22; }
+body.light-theme .masthead p{ color: rgba(28,43,34,0.6); }
+body.light-theme .quote-strip{
+  background: rgba(201,162,39,0.12);
+  color:#8f7420;
+  border-color: rgba(201,162,39,0.4);
+}
+body.light-theme .sheet{
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+  border: 1px solid #e3ddc9;
+}
+body.light-theme .tool-btn{
+  color:#1c2b22;
+  border-color: rgba(28,43,34,0.25);
+}
+body.light-theme .tool-btn:hover{
+  border-color: var(--gold-dim);
+  color: var(--gold-dim);
+}
+
+.quote-strip{
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: var(--gold);
+  background: rgba(201,162,39,0.08);
+  border: 1px solid rgba(201,162,39,0.35);
+  border-radius: 3px;
+  padding: 10px 14px;
+  margin-bottom: 26px;
+  min-height: 18px;
+}
+
+.sheet{
+  background: var(--paper);
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+  padding: 28px 30px;
+  margin-bottom: 24px;
+  position: relative;
+}
+.sheet::before{
+  content:"";
+  position:absolute; left:0; top:0; bottom:0;
+  width: 6px;
+  background: linear-gradient(var(--gold), var(--gold-dim));
+  border-radius: 4px 0 0 4px;
+}
+
+h2.section-title{
+  font-size: 13px;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  color: var(--gold-dim);
+  margin: 0 0 16px;
+  border-bottom: 1px dashed var(--rule);
+  padding-bottom: 8px;
+}
+
+form#expense-form{
+  display:grid;
+  grid-template-columns: 2fr 1fr 1.2fr 1fr auto;
+  gap: 12px;
+  align-items: end;
+}
+.field{ display:flex; flex-direction:column; gap:6px; }
+.field label{
+  font-family:'Courier New', monospace;
+  font-size: 11px;
+  color:#6b6250;
+}
+.field input, .field select{
+  font-family: Georgia, serif;
+  font-size: 14px;
+  padding: 9px 10px;
+  border: 1px solid var(--rule);
+  border-radius: 30px;
+  background: #fffdf8;
+  color: var(--ink);
+}
+.field input:focus, .field select:focus{
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+}
+button{
+  font-family:'Courier New', monospace;
+  cursor:pointer;
+  border:none;
+  border-radius: 2px;
+}
+#expense-form button{
+  background: var(--ink);
+  color: var(--paper);
+  padding: 10px 18px;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  height: 40px;
+}
+#expense-form button:hover{ background:#0d1610; }
+
+.error-msg{
+  color: var(--red);
+  font-family:'Courier New', monospace;
+  font-size: 12px;
+  margin-top: 12px;
+  display:none;
+}
+
+.summary-grid{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.stat{
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 14px 14px 12px;
+}
+.stat .label{
+  font-family:'Courier New', monospace;
+  font-size: 10.5px;
+  color:#6b6250;
+  letter-spacing:0.05em;
+  margin-bottom: 8px;
+}
+.stat .value{
+  font-family:'Courier New', monospace;
+  font-size: 20px;
+  font-weight:bold;
+}
+
+.controls-row{
+  display:flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+.controls-row .field{ flex:1; min-width: 160px; }
+
+table{
+  width:100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+thead th{
+  text-align:left;
+  font-family:'Courier New', monospace;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color:#6b6250;
+  border-bottom: 1px solid var(--ink);
+  padding: 8px 6px;
+}
+tbody td{
+  padding: 10px 6px;
+  border-bottom: 1px dashed var(--rule);
+  vertical-align: middle;
+}
+tbody tr:hover{ background: rgba(201,162,39,0.06); }
+.cat-tag{
+  font-family:'Courier New', monospace;
+  font-size: 10.5px;
+  padding: 3px 8px;
+  border: 1px solid var(--gold-dim);
+  border-radius: 10px;
+  color: var(--gold-dim);
+  white-space:nowrap;
+}
+.amt{ font-family:'Courier New', monospace; font-weight:bold; }
+.del-btn{
+  background:none;
+  color: var(--red);
+  font-size: 12px;
+  padding: 4px 8px;
+  border: 1px solid var(--red);
+  border-radius: 2px;
+}
+
+.del-btn:hover{ background: var(--red); color:#fff; }
+.edit-btn{
+  background:none;
+  color: var(--gold-dim);
+  font-size: 12px;
+  padding: 4px 8px;
+  border: 1px solid var(--gold-dim);
+  border-radius: 2px;
+  margin-right: 6px;
+}
+.edit-btn:hover{ background: var(--gold-dim); color:#fff; }
+#cancel-edit-btn{
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  padding: 10px 16px;
+  font-size: 13px;
+  height: 40px;
+}
+#cancel-edit-btn:hover{ border-color: var(--red); color: var(--red); }
+.empty-row td{
+  text-align:center;
+  padding: 30px 0;
+  color:#8a8168;
+  font-family:'Courier New', monospace;
+  font-size: 13px;
+}
+
+@media (max-width: 720px){
+  form#expense-form{ grid-template-columns: 1fr 1fr; }
+  .summary-grid{ grid-template-columns: 1fr 1fr; }
+}
