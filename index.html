@@ -17,8 +17,9 @@
         <p>Record it, categorize it, know where it went.</p>
       </div>
       <div class="toolbar">
-        <button type="button" id="theme-toggle" class="tool-btn">🌙 Dark</button>
-        <button type="button" id="export-btn" class="tool-btn">Export CSV</button>
+        
+        
+        
       </div>
     </div>
   </div>
@@ -59,28 +60,7 @@
     <p class="error-msg" id="error-msg"></p>
   </div>
 
-  <!-- Summary -->
-  <div class="sheet">
-    <h2 class="section-title">summary</h2>
-    <div class="summary-grid">
-      <div class="stat">
-        <div class="label">total spent</div>
-        <div class="value" id="stat-total">₹0.00</div>
-      </div>
-      <div class="stat">
-        <div class="label">no. of expenses</div>
-        <div class="value" id="stat-count">0</div>
-      </div>
-      <div class="stat">
-        <div class="label">highest expense</div>
-        <div class="value" id="stat-highest">₹0.00</div>
-      </div>
-      <div class="stat">
-        <div class="label">this month</div>
-        <div class="value" id="stat-month">₹0.00</div>
-      </div>
-    </div>
-  </div>
+
 
   <!-- Filter / Search / Sort -->
   <div class="sheet">
@@ -123,10 +103,35 @@
           <th></th>
         </tr>
       </thead>
+      
       <tbody id="expense-body">
         <tr class="empty-row"><td colspan="5">No expenses yet — add your first one above.</td></tr>
       </tbody>
+      
     </table>
+    
+  </div>
+    <!-- Summary -->
+  <div class="sheet">
+    <h2 class="section-title">summary</h2>
+    <div class="summary-grid">
+      <div class="stat">
+        <div class="label">total spent</div>
+        <div class="value" id="stat-total">₹0.00</div>
+      </div>
+      <div class="stat">
+        <div class="label">no. of expenses</div>
+        <div class="value" id="stat-count">0</div>
+      </div>
+      <div class="stat">
+        <div class="label">highest expense</div>
+        <div class="value" id="stat-highest">₹0.00</div>
+      </div>
+      <div class="stat">
+        <div class="label">this month</div>
+        <div class="value" id="stat-month">₹0.00</div>
+      </div>
+    </div>
   </div>
 
 </div>
@@ -134,3 +139,10 @@
 <script src="script.js"></script>
 </body>
 </html>
+
+
+
+
+<!-- git remote add origin https://github.com/muhsinmuzhiii/Expense-Tracker.git
+git branch -M master
+git push -u origin master -->

@@ -24,7 +24,6 @@ const statMonth = document.getElementById('stat-month');
 const submitBtn = document.getElementById('submit-btn');
 const cancelEditBtn = document.getElementById('cancel-edit-btn');
 const themeToggle = document.getElementById('theme-toggle');
-const exportBtn = document.getElementById('export-btn');
 
 let editingId = null; // null = add mode, otherwise holds the id being edited
 
@@ -149,13 +148,16 @@ tbody.addEventListener('click', (e) => {
   }
 
   const delBtn = e.target.closest('.del-btn');
-  if(delBtn){
-    const { id } = delBtn.dataset;
-    expenses = expenses.filter(exp => exp.id !== id);
-    saveExpenses();
-    if(editingId === id) cancelEdit(); // was editing the row we just deleted
-    render();
-  }
+if(delBtn){
+  const confirmDelete = confirm('Are you sure you want to delete this expense?');
+  if(!confirmDelete) return;  // "Cancel" 
+
+  const { id } = delBtn.dataset;
+  expenses = expenses.filter(exp => exp.id !== id);
+  saveExpenses();
+  if(editingId === id) cancelEdit();
+  render();
+}
 });
 
 // ---- Search / Filter / Sort listeners ----
@@ -217,7 +219,7 @@ function escapeHtml(str){
 
 // ---- Render summary (reduce, filter, sort/spread) ----
 function renderSummary(){
-  const total = expenses.reduce((sum, exp) => sum + exp.amount, 0);
+  const total = expenses.reduce((sum, exp) => sum + exp.amount, 0 );
   const count = expenses.length;
   const highest = expenses.reduce((max, exp) => Math.max(max, exp.amount), 0);
 
@@ -240,81 +242,19 @@ function render(){
   renderSummary();
 }
 
-// ---- Theme toggle (Dark / Light) ----
-const THEME_KEY = 'ledger_theme';
 
-function applyTheme(theme){
-  if(theme === 'light'){
-    document.body.classList.add('light-theme');
-    themeToggle.textContent = '☀️ Light';
-  }else{
-    document.body.classList.remove('light-theme');
-    themeToggle.textContent = '🌙 Dark';
-  }
-}
 
-themeToggle.addEventListener('click', () => {
-  const isLight = document.body.classList.contains('light-theme');
-  const nextTheme = isLight ? 'dark' : 'light';
-  applyTheme(nextTheme);
-  try{
-    localStorage.setItem(THEME_KEY, nextTheme);
-  }catch(err){
-    console.error('Failed to save theme preference:', err);
-  }
-});
-
-// ---- Export to CSV ----
-function exportToCsv(){
-  const list = getVisibleExpenses();
-
-  if(list.length === 0){
-    showError('No expenses to export.');
-    return;
-  }
-
-  const header = ['Title', 'Category', 'Date', 'Amount'];
-  const rows = list.map(({ title, category, date, amount }) => {
-    // wrap title in quotes and escape any inner quotes, since titles can contain commas
-    const safeTitle = `"${title.replace(/"/g, '""')}"`;
-    return [safeTitle, category, date, amount.toFixed(2)].join(',');
-  });
-  const csvContent = [header.join(','), ...rows].join('\n');
-
-  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = `expenses-${new Date().toISOString().slice(0, 10)}.csv`;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
-}
-
-exportBtn.addEventListener('click', exportToCsv);
 
 // ---- Advanced: Motivational Quote API ----
 async function loadQuote(){
   const quoteStrip = document.getElementById('quote-strip');
   try{
-    const res = await fetch('https://api.quotable.io/random?tags=motivational');
+    const res = await fetch('https://dummyjson.com/quotes/random');
     if(!res.ok) throw new Error('Bad response');
     const data = await res.json();
-    quoteStrip.textContent = `"${data.content}" — ${data.author}`;
+    quoteStrip.textContent = `"${data.quote}" — ${data.author}`;
   }catch(err){
     console.error('Quote fetch failed:', err);
     quoteStrip.textContent = 'Unable to load quote. Please try again.';
   }
 }
-
-// ---- Init ----
-dateInput.valueAsDate = new Date();
-try{
-  const savedTheme = localStorage.getItem(THEME_KEY);
-  if(savedTheme) applyTheme(savedTheme);
-}catch(err){
-  console.error('Failed to load theme preference:', err);
-}
-render();
-loadQuote();
