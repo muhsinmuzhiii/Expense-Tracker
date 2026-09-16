@@ -258,3 +258,7 @@ async function loadQuote(){
     quoteStrip.textContent = 'Unable to load quote. Please try again.';
   }
 }
+// ---- Init ----
+dateInput.valueAsDate = new Date();
+render();
+loadQuote();

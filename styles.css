@@ -5,6 +5,8 @@
   --cover-2:#1b1f2c;
   /* --gold:#f8f8f7;
   --gold-dim:#f8f8f7; */
+  --gold:#c9a227;
+--gold-dim:#8f7420;
   --rule:#d8d0ba;
   --red:#9c3b32;
   --green:#3e6b4f;
@@ -112,6 +114,7 @@ body.light-theme .tool-btn:hover{
   margin-bottom: 26px;
   min-height: 18px;
 }
+
 
 .sheet{
   background: var(--paper);
